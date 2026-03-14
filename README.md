@@ -27,6 +27,7 @@ This implementation is a submission for the final project of the class of "Digit
 The problem tackled here is the Heart Rate (HR) estimation from a facial video footage. The proposed solution is an implementation of remote Photoplethysmography, in which DIP is used to meassure the subtle channel color changes of a focused area of the skin (in this case of the forehead) caused by the variable blood volume. By meassuring the frequency of the normalized and denoised Blood Volume Pulse (BVP) signal the Heart Rate of the subject can be estimated in an offline way.
 
 ![Sample frame and Results](media/frame_n_hr.png)
+*Figure 1: a) Sample frame of data (left). b) Comparison of ground truth and estimated Heart Rate.*
 
 
 # Project Structure
@@ -34,7 +35,7 @@ The problem tackled here is the Heart Rate (HR) estimation from a facial video f
 The repository consists of the following files:
 ```bash
 ├── media
-|   └── frame_n_hr.png
+│   └── frame_n_hr.png
 ├── 58545_DIP_HR_Estimation.pdf
 ├── HR_Extraction_from_Video.ipynb
 └── README.md
@@ -75,7 +76,7 @@ All the necessary dependencies needed for the reproduction of the project are ca
 # Data
 
 ## Source Data
-The dataset used in this project is the **UBFC-rPPG Dataset**, which is widely used in academic research for remote photoplethysmography (rPPG).
+The dataset used in this project is the **UBFC-rPPG Dataset**[^1], which is widely used in academic research for remote photoplethysmography (rPPG).
 
 * **Source Link:** [UBFC-rPPG Dataset](https://sites.google.com/view/ybenezeth/ubfcrppg)
 * **Data Description:** The dataset consists of uncompressed video recordings of subjects filmed in 30fps and 640x480 resolution by a simple low cost webcam (Logitech C920 HD Pro) and of their corresponding ground truth obtained by a transmissive pulse oximeter (CMS50E). The dataset is divided into two sets depending on the environmental conditions.
@@ -123,4 +124,49 @@ To acquire the data necessary to reproduce the project, follow the steps below:
 3. **Force-install Specific Package Versions:** Because cloud environments update their software frequently, newer versions of libraries might cause compatibility issues. If you encounter any unexpected errors while running the cells, please force-install the specific package versions listed in the [Python Packages Used](#codes-and-resources-used) section. To do that create a new code cell and run, for example, the command `!pip install opencv-python==4.9.0.80`.
 
 
+# Code Structure
+
+The code of the `HR_Extraction_from_Video.ipynb` notebook can be devided into 4 parts:
+
+* **Part 0: Setup**
+
+  Necessary for loading the project data and importing the used libraries.
+
+* **Part 1: Data Analysis**
+
+  In this sector the `vid.avi` video file and `ground_truth.txt` ground truth file of subject 45 are analyzed in order to print useful information about them for the user. Useful information include sample frame, total duration and frames, waveform of groundtruth PPG and Heart Rate, etc.
+
+  ![Sample frame and Results](media/subject45_frame.png)
+  *Figure 2: Sample video frame of subject 45 of UBFC-rPPG Dataset.*
+
+* **Part 2: Heart Rate Estimation**
+
+  In this part the algorithm for extracting the subject's Heart Rate is applied and it follows the below steps. It must be noted that the algorithm was developed using the methodology proposed by Berggren & Berggren (2019)[^2] as a primary reference.
+
+  1. **ROI Definition**: The proposed algorithm does not use the whole video frame but a patch of subject 45 skin on their forehead. In this implementation two ways of defining the Region Of Interest (ROI) are tested: **a) Manual Definition**, where a stationary pixel area is predefined as the ROI for the whole video, and **b) Definition through Face Tracking**, where a patch of constant area is chosen automatically in every frame of the video using the *Viola and Jones*[^3] face detection algorithm which is based on the principle of Haar-like features.
+
+      ![Manual ROI Patch](media/manual_roi.png)
+      *Figure 3: Manual ROI definition for a single frame of subject 45 video.*
+
+      ![Automatic ROI Patch](media/face_detection_roi.png)
+      *Figure 4: ROI definition through face detection fo a single frame of subject 45 video.*
+
+      > **Note:** The nexts steps of the algorithm are applied to both Manual and Automatic ROI. However, since results are similar and Automatic ROI is the objectively better and smarter implementation, for the folowing steps only the results of this ROI are presented.
+
+  2. **Spatial Averaging**: For the ROI of every video frame, the mean pixel intensity of a single color channel—in this case the green channel—is calculated. These sequential averages are then plotted over time to construct a raw waveform, which serves as the basis for extracting the heart rate signal.
+
+      ![Spatial Averaging Result](media/spatial_averaging.png)
+      *Figure 5: Resulting signal of spatially averaging the green channel of the ROI of every frame*
+
+* **Part 0: Setup**
+
+  Necessary for loading the project data and importing the used libraries. 
+
+
 # Acknowledgements/References
+
+[^1]: S. Bobbia, R. Macwan, Y. Benezeth, A. Mansouri, J. Dubois, "Unsupervised skin tissue segmentation for remote photoplethysmography", Pattern Recognition Letters, 2017.
+
+[^2]: Berggrem, A., Berggrem J. (2019) Non-contact measurement of heart rate using a camera, [Master's thesis, Lund University]. lup.lub.lu.se. [http://lup.lub.lu.se/student-papers/record/8972235](http://lup.lub.lu.se/student-papers/record/8972235)
+
+[^3]: P. Viola and M. Jones, "Rapid object detection using a boosted cascade of simple features," Proceedings of the 2001 IEEE Computer Society Conference on Computer Vision and Pattern Recognition. CVPR 2001, Kauai, HI, USA, 2001, pp. I-I, doi: 10.1109/CVPR.2001.990517.
