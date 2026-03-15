@@ -228,7 +228,7 @@ Nowadays there are many advanced rPPG methods that are way more efficient and ac
 
 # Similar Projects
 
-For anyone who would like to learn a little bit more about rPPG and a practical application of this tool, they can check out the [presentation](similar_project/58545_rPPG_DMS.pptx) and the corresponding [report](similar_project/58545_rPPG_DMS.pdf) (both in greek) of another project of mine, where I designed a vitals and fatigue monitoring software that utilizes rPPG in a Driver Monitoring System of a car.
+For those who would like to learn a little bit more about rPPG and a practical application of this tool, they can check out the [presentation](similar_project/58545_rPPG_DMS.pptx) and the corresponding [report](similar_project/58545_rPPG_DMS.pdf) (both in greek) of another project of mine, where I designed a vitals and fatigue monitoring software that utilizes rPPG in a Driver Monitoring System of a car.
 
 This project was a submission for the final assignment of the class of "Biomedical Technology" (DUTH ECE: 9th Semester 2025-2026), for which students were tasked to design from an engineers perspective a biomedical product of their choice.
 
