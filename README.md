@@ -14,7 +14,7 @@
 * [Project Structure](#project-structure)
 * [Dependencies](#dependencies)
   * [Codes and Resources Used](#codes-and-resources-used)
-  * [Python Packages Used](#codes-and-resources-used)
+  * [Python Packages Used](#python-packages-used)
 * [Data](#data)
   * [Source Data](#source-data)
   * [Data Acquisition](#data-acquisition)
