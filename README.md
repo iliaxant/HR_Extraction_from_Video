@@ -143,6 +143,7 @@ The code of the `HR_Extraction_from_Video.ipynb` notebook can be divided into 4 
   In this sector the `vid.avi` video file and `ground_truth.txt` ground truth file of subject 45 are analyzed in order to print useful for the user information about them. Useful information includes sample frame, total duration and frames, waveform of ground truth PPG and Heart Rate, etc.
 
   ![Sample frame and Results](media/subject45_frame.png)
+  
   *Fig. 2: Sample video frame of subject 45 of UBFC-rPPG Dataset[^1].*
 
 * **Part 2: Heart Rate Estimation**
