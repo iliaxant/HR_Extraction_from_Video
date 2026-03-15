@@ -48,7 +48,7 @@ The repository consists of the following files:
 ├── HR_Extraction_from_Video.ipynb
 └── README.md
 ```
-* `media`: Directory containing pictures used in README.md
+* `media`: Directory containing pictures used in README.md.
 * `similar_project`: Directory containing presentation and report files *(both in greek)* of a similar project.
 * `58545_DIP_HR_Estimation.pdf`: An extensive report *(in greek)* of the problem and the applied methods.
 * `HR_Extraction_from_Video.ipynb`: The heart of the project. A Jupyter Notebook containing the step-by-step implementation of the solution *(text cells in greek)*. 
